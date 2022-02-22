@@ -2,17 +2,19 @@ package com.alkemy.disney.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "pelicula")
 @Getter @Setter
+@SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
+@Where(clause = "deleted = false")
 public class PeliculaEntity {
 
     @Id
@@ -29,24 +31,28 @@ public class PeliculaEntity {
 
     private Integer calificacion;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     @JoinColumn(name = "genero_id", insertable = false, updatable = false)
     private GeneroEntity generoEntity;
 
     @Column(name = "genero_id",nullable = false)
     private Long generoId;
 
-    @ManyToMany(
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(
-            name = "personaje_pelicula",
-            joinColumns = @JoinColumn(name = "pelicula_id"),
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "personaje_pelicula", joinColumns = @JoinColumn(name = "pelicula_id"),
             inverseJoinColumns = @JoinColumn(name = "personaje_id")
     )
-    private Set<PersonajeEntity> personajes = new HashSet<>();
+    private List<PersonajeEntity> personajes = new ArrayList<>();
+
+    private Boolean deleted = Boolean.FALSE;
+
+    public void addPersonaje(PersonajeEntity personaje) {
+        personajes.add(personaje);
+    }
+
+    public void removePersonaje(PersonajeEntity personaje) {
+        personajes.remove(personaje);
+    }
 
 
 

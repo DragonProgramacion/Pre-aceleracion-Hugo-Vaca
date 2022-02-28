@@ -32,9 +32,4 @@ public class GeneroServiceImp implements GeneroService {
         return result;
     }
 
-    public void delete(Long id) {
-        this.generoRepository.deleteById(id);
-    }
-
-
 }

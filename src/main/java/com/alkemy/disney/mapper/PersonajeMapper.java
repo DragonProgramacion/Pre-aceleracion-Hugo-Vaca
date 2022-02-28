@@ -1,22 +1,19 @@
 package com.alkemy.disney.mapper;
 
-import com.alkemy.disney.dto.PeliculaBasicDTO;
+import com.alkemy.disney.dto.PeliculaDTO;
 import com.alkemy.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.dto.PersonajeDTO;
 import com.alkemy.disney.entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class PersonajeMapper {
 
     @Autowired
-    private static PeliculaMapper peliculaMapper;
+    private PeliculaMapper peliculaMapper;
 
     public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto){
         PersonajeEntity entity = new PersonajeEntity();
@@ -36,10 +33,11 @@ public class PersonajeMapper {
         dto.setEdad(personajeEntity.getEdad());
         dto.setPeso(personajeEntity.getPeso());
         dto.setHistoria(personajeEntity.getHistoria());
-        //if(loadPeliculas){
-        //    List<PeliculaDTO> peliculasDTO = this.peliculaMapper.peliculaEntitySet2DTOList(personajeEntity.getPeliculas(), false);
-        //    dto.setPeliculas(peliculasDTO);
-        //}
+
+        if(loadPeliculas){
+            List<PeliculaDTO> peliculasDTO = this.peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getPeliculas(), false);
+            dto.setPeliculas(peliculasDTO);
+        }
         return dto;
     }
 
@@ -49,6 +47,22 @@ public class PersonajeMapper {
         personajeEntity.setEdad(personajeDTO.getEdad());
         personajeEntity.setPeso(personajeDTO.getPeso());
         personajeEntity.setHistoria(personajeDTO.getHistoria());
+    }
+
+    public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<PersonajeEntity> entities, boolean loadMovies) {
+        List<PersonajeDTO> dtos = new ArrayList<>();
+        for (PersonajeEntity entity : entities) {
+            dtos.add(personajeEntity2DTO(entity, loadMovies));
+        }
+        return dtos;
+    }
+
+    public Set<PersonajeEntity> personajeDTOList2EntitySet(List<PersonajeDTO> dtos) {
+        Set<PersonajeEntity> entities = new HashSet<>();
+        for (PersonajeDTO dto : dtos) {
+            entities.add(personajeDTO2Entity(dto));
+        }
+        return entities;
     }
     
     public PersonajeBasicDTO personajeEntity2BasicDTO(PersonajeEntity entity) {

@@ -31,9 +31,12 @@ public class PeliculaServiceImp implements PeliculaService {
     @Autowired
     private PersonajeService personajeService;
 
-    @Override
-    public PeliculaEntity getById(Long id) {
-        return null;
+    public PeliculaEntity getEntityById(Long id) {
+        Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
+        if(!entity.isPresent()) {
+            throw new ParamNotFound("Movie id not found");
+        }
+        return entity.get();
     }
 
     public PeliculaDTO getDetailsById(Long id) {
@@ -52,12 +55,12 @@ public class PeliculaServiceImp implements PeliculaService {
         return dtos;
     }
 
+
     public PeliculaDTO save(PeliculaDTO dto) {
         PeliculaEntity entity = this.peliculaMapper.peliculaDTO2Entity(dto);
         PeliculaEntity peliculaSaved = this.peliculaRepository.save(entity);
-        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(peliculaSaved,false);
+        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(peliculaSaved,true);
         return result;
-
     }
 
     public PeliculaDTO update(Long id , PeliculaDTO peliculaDTO) {
@@ -67,23 +70,23 @@ public class PeliculaServiceImp implements PeliculaService {
         }
         this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), peliculaDTO);
         PeliculaEntity entitySaved = this.peliculaRepository.save(entity.get());
-        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitySaved, false);
+        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitySaved, true);
         return result;
     }
 
     public void addPersonaje(Long id, Long idPersonaje){
-        PeliculaEntity entity = this.peliculaRepository.getById(id);
-        entity.getPersonajes().size();
-        PersonajeEntity personajeEntity = this.personajeService.getById(idPersonaje);
-        entity.addPersonaje(personajeEntity);
+        PeliculaEntity entity = getEntityById(id);
+        Set<PersonajeEntity> entities = entity.getPersonajes();
+        entities.add(personajeService.getEntityById(idPersonaje));
+        entity.setPersonajes(entities);
         this.peliculaRepository.save(entity);
     }
 
     public void removePersonaje(Long id, Long idPersonaje){
-        PeliculaEntity entity = this.peliculaRepository.getById(id);
-        entity.getPersonajes().size();
-        PersonajeEntity personajeEntity = this.personajeService.getById(idPersonaje);
-        entity.removePersonaje(personajeEntity);
+        PeliculaEntity entity = getEntityById(id);
+        Set<PersonajeEntity> entities = entity.getPersonajes();
+        entities.remove(personajeService.getEntityById(idPersonaje));
+        entity.setPersonajes(entities);
         this.peliculaRepository.save(entity);
     }
 

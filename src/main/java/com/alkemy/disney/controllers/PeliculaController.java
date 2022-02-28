@@ -43,8 +43,8 @@ public class PeliculaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PeliculaDTO> update(@PathVariable Long id, @RequestParam PeliculaDTO pelicula){
-        PeliculaDTO result = this.peliculaService.update(id,pelicula);
+    public ResponseEntity<PeliculaDTO> update(@PathVariable Long id, @RequestBody PeliculaDTO peliculaDTO){
+        PeliculaDTO result = this.peliculaService.update(id,peliculaDTO);
         return ResponseEntity.ok().body(result);
     }
 
@@ -56,15 +56,15 @@ public class PeliculaController {
     }
 
     @PostMapping("{id}/personaje/{idPersonaje}")
-    public ResponseEntity<Void> addPersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
+    public ResponseEntity<PeliculaDTO> addPersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
         this.peliculaService.addPersonaje(id,idPersonaje);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok().body(peliculaService.getDetailsById(id));
     }
 
     @DeleteMapping("{id}/personaje/{idPersonaje}")
-    public ResponseEntity<Void> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
+    public ResponseEntity<PeliculaDTO> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
         this.peliculaService.removePersonaje(id,idPersonaje);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.ok().body(peliculaService.getDetailsById(id));
     }
 
 }

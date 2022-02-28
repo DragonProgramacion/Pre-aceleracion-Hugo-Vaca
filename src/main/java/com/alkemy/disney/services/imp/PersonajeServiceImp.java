@@ -35,18 +35,12 @@ public class PersonajeServiceImp implements PersonajeService {
     @Autowired
     private PeliculaService peliculaService;
 
-    @Override
-    public PersonajeEntity getById(Long id) {
-        return null;
-    }
-
     public PersonajeDTO getDetailsById(Long id) {
         Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
         if(!entity.isPresent()) {
             throw new ParamNotFound("invalid character id");
         }
-        PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(entity.get(),true);
-        return personajeDTO;
+       return this.personajeMapper.personajeEntity2DTO(entity.get(),true);
     }
 
     public List<PersonajeBasicDTO> getByFilters(String nombre, Integer edad, Set<Long> peliculas, String order) {
@@ -56,10 +50,19 @@ public class PersonajeServiceImp implements PersonajeService {
         return dtos;
     }
 
-    public PersonajeDTO save(PersonajeDTO dto) {
+    public PersonajeEntity getEntityById(Long id) {
+        Optional<PersonajeEntity> entity= personajeRepository.findById(id);
+        if (!entity.isPresent()){
+            throw new ParamNotFound("ID character not found");
+        }
+        return entity.get();
+    }
+
+    public PersonajeDTO save(PersonajeDTO dto, Long idPelicula) {
         PersonajeEntity entity = personajeMapper.personajeDTO2Entity(dto);
         PersonajeEntity entitySaved = this.personajeRepository.save(entity);
-        PersonajeDTO result = this.personajeMapper.personajeEntity2DTO(entitySaved, false);
+        peliculaService.addPersonaje(idPelicula,entitySaved.getId());
+        PersonajeDTO result = this.personajeMapper.personajeEntity2DTO(entitySaved, true);
         return result;
     }
 
@@ -70,24 +73,8 @@ public class PersonajeServiceImp implements PersonajeService {
         }
         this.personajeMapper.personajeEntityRefreshValues(entity.get(),personajeDTO);
         PersonajeEntity entitySaved = this.personajeRepository.save(entity.get());
-        PersonajeDTO result = this.personajeMapper.personajeEntity2DTO(entitySaved,false);
+        PersonajeDTO result = this.personajeMapper.personajeEntity2DTO(entitySaved,true);
         return result;
-    }
-
-    public void addPelicula(Long id , Long idPelicula){
-        PersonajeEntity entity = this.personajeRepository.getById(id);
-        entity.getPeliculas().size();
-        PeliculaEntity peliculaEntity = this.peliculaService.getById(idPelicula);
-        entity.addPelicula(peliculaEntity);
-        this.personajeRepository.save(entity);
-    }
-
-    public void removePelicula(Long id , Long idPelicula){
-        PersonajeEntity entity = this.personajeRepository.getById(id);
-        entity.getPeliculas().size();
-        PeliculaEntity peliculaEntity = this.peliculaService.getById(idPelicula);
-        entity.removePelicula(peliculaEntity);
-        this.personajeRepository.save(entity);
     }
 
     public void delete(Long id) {

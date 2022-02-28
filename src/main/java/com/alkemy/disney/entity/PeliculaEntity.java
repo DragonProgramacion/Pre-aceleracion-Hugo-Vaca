@@ -26,7 +26,7 @@ public class PeliculaEntity {
     private String titulo;
 
     @Column(name = "fecha_creacion")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaCreacion;
 
     private Integer calificacion;
@@ -42,19 +42,27 @@ public class PeliculaEntity {
     @JoinTable(name = "personaje_pelicula", joinColumns = @JoinColumn(name = "pelicula_id"),
             inverseJoinColumns = @JoinColumn(name = "personaje_id")
     )
-    private List<PersonajeEntity> personajes = new ArrayList<>();
+    private Set<PersonajeEntity> personajes = new HashSet<>();
 
     private Boolean deleted = Boolean.FALSE;
 
     public void addPersonaje(PersonajeEntity personaje) {
-        personajes.add(personaje);
+        this.personajes.add(personaje);
     }
 
     public void removePersonaje(PersonajeEntity personaje) {
-        personajes.remove(personaje);
+        this.personajes.remove(personaje);
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final PeliculaEntity other = (PeliculaEntity) obj;
+        return other.id == this.id;
+    }
 
 
 

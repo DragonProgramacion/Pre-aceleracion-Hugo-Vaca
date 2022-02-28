@@ -38,8 +38,8 @@ public class PersonajeController {
     }
 
     @PostMapping()
-    public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje) {
-        PersonajeDTO personajeCreada = personajeService.save(personaje);
+    public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje, @RequestParam Long idPelicula) {
+        PersonajeDTO personajeCreada = personajeService.save(personaje, idPelicula);
         return ResponseEntity.status(HttpStatus.CREATED).body(personajeCreada);
     }
 
@@ -56,16 +56,4 @@ public class PersonajeController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PostMapping("/{id}/pelicula/{idPelicula}")
-    public ResponseEntity<Void> addPelicula(@PathVariable Long id, @PathVariable Long idPelicula){
-        this.personajeService.addPelicula(id,idPelicula);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @DeleteMapping("/{id}/pelicula/{idPelicula}")
-    public ResponseEntity<Void> removePelicula(@PathVariable Long id, @PathVariable Long idPelicula) {
-        this.personajeService.removePelicula(id,idPelicula);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
-    }
 }

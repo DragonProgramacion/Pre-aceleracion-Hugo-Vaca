@@ -14,7 +14,7 @@ public interface PeliculaService {
 
     void delete(Long id);
 
-    PeliculaDTO update(Long id, PeliculaDTO pelicula);
+    PeliculaDTO update(Long id, PeliculaDTO peliculaDTO);
 
     void addPersonaje(Long id, Long idPersonaje);
 
@@ -22,7 +22,7 @@ public interface PeliculaService {
 
     List<PeliculaBasicDTO> getByFilters(String nombre, Set<Long> generos, String order);
 
-    PeliculaEntity getById(Long idPelicula);
-
     PeliculaDTO getDetailsById(Long id);
+
+    PeliculaEntity getEntityById(Long id);
 }

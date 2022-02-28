@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface PersonajeService {
 
-    PersonajeDTO save(PersonajeDTO dto);
+    PersonajeDTO save(PersonajeDTO dto, Long idPelicula);
 
     void delete(Long id);
 
@@ -20,9 +20,5 @@ public interface PersonajeService {
 
     PersonajeDTO getDetailsById(Long id);
 
-    void addPelicula(Long id, Long idPelicula);
-
-    void removePelicula(Long id, Long idPelicula);
-
-    PersonajeEntity getById(Long idPersonaje);
+    PersonajeEntity getEntityById(Long id);
 }

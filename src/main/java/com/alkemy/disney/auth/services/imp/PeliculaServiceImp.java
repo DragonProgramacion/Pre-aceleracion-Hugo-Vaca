@@ -1,5 +1,7 @@
-package com.alkemy.disney.services.imp;
+package com.alkemy.disney.auth.services.imp;
 
+import com.alkemy.disney.auth.services.PeliculaService;
+import com.alkemy.disney.auth.services.PersonajeService;
 import com.alkemy.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.dto.PeliculaDTO;
 import com.alkemy.disney.dto.PeliculaFiltersDTO;
@@ -9,8 +11,6 @@ import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.repository.PeliculaRepository;
 import com.alkemy.disney.repository.specifications.PeliculaSpecification;
-import com.alkemy.disney.services.PeliculaService;
-import com.alkemy.disney.services.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

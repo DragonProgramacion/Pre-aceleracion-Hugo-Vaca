@@ -2,7 +2,7 @@ package com.alkemy.disney.controllers;
 
 import com.alkemy.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.dto.PersonajeDTO;
-import com.alkemy.disney.services.PersonajeService;
+import com.alkemy.disney.auth.services.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.alkemy.disney.services;
+package com.alkemy.disney.auth.services;
 
 
 import com.alkemy.disney.dto.PeliculaBasicDTO;

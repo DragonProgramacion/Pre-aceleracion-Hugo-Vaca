@@ -158,4 +158,3 @@ buildNumber.properties
 
 # "temporary" build files
 /target
-/doc/

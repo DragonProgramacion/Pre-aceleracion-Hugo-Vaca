@@ -2,7 +2,7 @@ package com.alkemy.disney.controllers;
 
 import com.alkemy.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.dto.PeliculaDTO;
-import com.alkemy.disney.services.PeliculaService;
+import com.alkemy.disney.auth.services.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

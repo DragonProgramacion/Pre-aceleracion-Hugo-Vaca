@@ -1,10 +1,10 @@
-package com.alkemy.disney.services.imp;
+package com.alkemy.disney.auth.services.imp;
 
+import com.alkemy.disney.auth.services.GeneroService;
 import com.alkemy.disney.dto.GeneroDTO;
 import com.alkemy.disney.entity.GeneroEntity;
 import com.alkemy.disney.mapper.GeneroMapper;
 import com.alkemy.disney.repository.GeneroRepository;
-import com.alkemy.disney.services.GeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

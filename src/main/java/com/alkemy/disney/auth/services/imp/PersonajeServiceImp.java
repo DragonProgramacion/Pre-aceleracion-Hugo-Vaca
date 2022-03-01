@@ -1,17 +1,16 @@
-package com.alkemy.disney.services.imp;
+package com.alkemy.disney.auth.services.imp;
 
+import com.alkemy.disney.auth.services.PeliculaService;
 import com.alkemy.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.dto.PersonajeDTO;
 import com.alkemy.disney.dto.PersonajeFiltersDTO;
-import com.alkemy.disney.entity.PeliculaEntity;
 import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.mapper.PersonajeMapper;
 import com.alkemy.disney.repository.PersonajeRepository;
 
 import com.alkemy.disney.repository.specifications.PersonajeSpecification;
-import com.alkemy.disney.services.PeliculaService;
-import com.alkemy.disney.services.PersonajeService;
+import com.alkemy.disney.auth.services.PersonajeService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

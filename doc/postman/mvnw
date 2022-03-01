@@ -1,0 +1,17 @@
+{
+	"info": {
+		"_postman_id": "2f524f13-2472-4a77-b2fa-41de69c45b50",
+		"name": "Alkemy Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "personajes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -1,6 +1,6 @@
 # Alkemy-Challenge-2022
 
-CHALLENGE BACKEND ALKEMY - Java Spring Boot (API)
+CHALLENGE BACKEND ALKEMY - API Rest Java Spring Boot 
 
 Challenge de ingreso a la aceleración Alkemy.
 Se trata de una API para explorar el mundo de Disney, la cual permitirá conocer y modificar los personajes que lo componen y entender en qué películas estos participaron.

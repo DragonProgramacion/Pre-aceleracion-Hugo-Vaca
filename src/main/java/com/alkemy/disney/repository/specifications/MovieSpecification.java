@@ -1,8 +1,8 @@
 package com.alkemy.disney.repository.specifications;
 
-import com.alkemy.disney.dto.PeliculaFiltersDTO;
-import com.alkemy.disney.entity.GeneroEntity;
-import com.alkemy.disney.entity.PeliculaEntity;
+import com.alkemy.disney.dto.MovieFiltersDTO;
+import com.alkemy.disney.entity.GenreEntity;
+import com.alkemy.disney.entity.MovieEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -16,34 +16,34 @@ import java.util.List;
 import javax.persistence.criteria.Predicate;
 
 @Component
-public class PeliculaSpecification {
+public class MovieSpecification {
 
-    public Specification<PeliculaEntity> getByFilters (PeliculaFiltersDTO filtersDTO) {
+    public Specification<MovieEntity> getByFilters (MovieFiltersDTO filtersDTO) {
         return ((root, query, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.hasLength(filtersDTO.getTitulo())) {
+            if (StringUtils.hasLength(filtersDTO.getTitle())) {
                 predicates.add(
                         criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("titulo")),
-                                "%" + filtersDTO.getTitulo().toLowerCase() + "%"
+                                criteriaBuilder.lower(root.get("title")),
+                                "%" + filtersDTO.getTitle().toLowerCase() + "%"
                         )
                 );
 
             }
 
-            if (!CollectionUtils.isEmpty(filtersDTO.getGeneros())) {
-                Join<GeneroEntity, PeliculaEntity> join = root.join("generos", JoinType.INNER);
-                Expression<String> generoId = join.get("id");
-                predicates.add(generoId.in(filtersDTO.getGeneros()));
+            if (!CollectionUtils.isEmpty(filtersDTO.getGenres())) {
+                Join<GenreEntity, MovieEntity> join = root.join("genres", JoinType.INNER);
+                Expression<String> genreId = join.get("id");
+                predicates.add(genreId.in(filtersDTO.getGenres()));
             }
 
             //remueve los duplicados
             query.distinct(true);
 
             //resuelve el order
-            String orderByField = "titulo";
+            String orderByField = "title";
             query.orderBy(filtersDTO.isASC() ?
                     criteriaBuilder.asc(root.get(orderByField)) :
                     criteriaBuilder.desc(root.get(orderByField))

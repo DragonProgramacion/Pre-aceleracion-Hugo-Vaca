@@ -3,25 +3,22 @@ package com.alkemy.disney.entity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "genero")
+@Table(name = "genre")
 @Getter @Setter
 @RequiredArgsConstructor
-public class GeneroEntity {
+public class GenreEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String nombre;
+    private String name;
 
-    private String imagen;
+    private String image;
 
     @Override
     public boolean equals(Object obj) {
@@ -29,7 +26,7 @@ public class GeneroEntity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final GeneroEntity other = (GeneroEntity) obj;
+        final GenreEntity other = (GenreEntity) obj;
         return other.id == this.id;
     }
 

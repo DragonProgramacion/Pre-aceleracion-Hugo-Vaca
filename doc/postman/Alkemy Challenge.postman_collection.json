@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "2f524f13-2472-4a77-b2fa-41de69c45b50",
+		"name": "Alkemy Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Personaje",
+			"item": [
+				{
+					"name": "personajes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": "http://localhost:8080/characters"
+					},
+					"response": []
+				},
+				{
+					"name": "personajes",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{{(JWT)}}",
+								"type": "default"
+							}
+						],
+						"url": "http://localhost:8080/characters/4"
+					},
+					"response": []
+				},
+				{
+					"name": "personajes",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"Image.jpg\",\r\n    \"name\": \"Leia Organa\",\r\n    \"age\": 19\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/characters/3"
+					},
+					"response": []
+				},
+				{
+					"name": "personajes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"Sith.jpg\",\r\n    \"name\": \"Darth Vader\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters?idMovie=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "idMovie",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personajes?filters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters?name=Leia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Leia"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pelicula",
+			"item": [
+				{
+					"name": "peliculas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/movies"
+					},
+					"response": []
+				},
+				{
+					"name": "peliculas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"movie.jpg\",\r\n    \"title\": \"Star Wars: A new hope\",\r\n    \"creationDate\": \"2021-02-01\",\r\n    \"genreId\": 1,\r\n    \"qualification\": 5,\r\n    \"characters\": [\r\n        {\r\n            \"image\": \"image.jpg\",\r\n            \"name\": \"Luke Skywalker\",\r\n            \"age\": \"21\",\r\n            \"weight\": \"50\",\r\n            \"story\": \"Luke Skywalker was a Tatooine farmboy who rose from humble beginnings to become one of the greatest Jedi the galaxy has ever known.\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/movies"
+					},
+					"response": []
+				},
+				{
+					"name": "peliculas",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/peliculas/2?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"peliculas",
+								"2"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "peliculas",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"movie.jpg\",\r\n    \"title\": \"Star Wars: The Empire Strikes Back\",\r\n    \"creationDate\": \"2021-02-01\",\r\n    \"genreId\": 1,\r\n    \"qualification\": 5,\r\n    \"characters\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/movies/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genero",
+			"item": [
+				{
+					"name": "genero",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sci-fi\",\r\n    \"image\": \"Genre.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/genres"
+					},
+					"response": []
+				},
+				{
+					"name": "genero",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Ciencia Ficcion\",\r\n    \"imagen\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/genres"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"v.alejandrohugo@gmail.com\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"v.alejandrohugo@gmail.com\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/register"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{JWT}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

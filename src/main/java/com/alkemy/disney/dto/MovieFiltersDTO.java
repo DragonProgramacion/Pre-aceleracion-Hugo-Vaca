@@ -12,9 +12,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PeliculaFiltersDTO {
-    private String titulo;
-    private Set<Long> generos;
+public class MovieFiltersDTO {
+    private String title;
+    private Set<Long> genres;
     private String order;
 
     public Boolean isASC() {

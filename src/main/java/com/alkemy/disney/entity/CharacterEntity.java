@@ -15,24 +15,24 @@ import java.util.Objects;
 @Getter @Setter
 @SQLDelete(sql = "UPDATE personaje SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class PersonajeEntity {
+public class CharacterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String imagen;
+    private String image;
 
-    private String nombre;
+    private String name;
 
-    private Double peso;
+    private Double weight;
 
-    private Integer edad;
+    private Integer age;
 
-    private String historia;
+    private String story;
 
-    @ManyToMany(mappedBy = "personajes",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    private List<PeliculaEntity> peliculas = new ArrayList<>();
+    @ManyToMany(mappedBy = "characters",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    private List<MovieEntity> movies = new ArrayList<>();
 
     private Boolean deleted = Boolean.FALSE;
 
@@ -44,7 +44,7 @@ public class PersonajeEntity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PersonajeEntity other = (PersonajeEntity) obj;
+        CharacterEntity other = (CharacterEntity) obj;
         return Objects.equals(id, other.id);
     }
 

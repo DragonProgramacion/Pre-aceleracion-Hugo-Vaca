@@ -1,4 +1,4 @@
-package com.alkemy.disney.auth.services;
+package com.alkemy.disney.services;
 
 public interface EmailService {
     void sendWelcomeEmailTo(String to);

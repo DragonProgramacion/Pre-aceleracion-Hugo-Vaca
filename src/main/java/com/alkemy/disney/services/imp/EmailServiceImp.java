@@ -1,6 +1,6 @@
-package com.alkemy.disney.auth.services.imp;
+package com.alkemy.disney.services.imp;
 
-import com.alkemy.disney.auth.services.EmailService;
+import com.alkemy.disney.services.EmailService;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;

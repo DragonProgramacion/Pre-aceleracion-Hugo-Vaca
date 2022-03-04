@@ -1,7 +1,6 @@
 package com.alkemy.disney.dto;
 
 
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +12,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PersonajeFiltersDTO {
-    private String nombre;
-    private Integer edad;
-    private Set<Long> peliculas;
+public class CharacterFiltersDTO {
+    private String name;
+    private Integer age;
+    private Set<Long> movies;
     private String order;
 
     public Boolean isASC() {
